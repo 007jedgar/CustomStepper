@@ -19,8 +19,10 @@
     [super viewDidLoad];
     
 
-    StepperView *stepperBox = [[StepperView alloc]initWithFrame:CGRectMake(110, 200, 200, 50)];
+    StepperView *stepperBox = [[StepperView alloc]initWithFrame:CGRectMake(0, 0, 200, 50)];
+    stepperBox.center = self.view.center;
     [self.view addSubview:stepperBox];
+    
     }
 
 /*

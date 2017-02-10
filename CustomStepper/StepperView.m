@@ -11,40 +11,54 @@
 @implementation StepperView
 
 
--(void) upButtonPressed {
+-(void) upButtonPressed:(id)sender {
     self.count++;
+    NSLog(@"%d",self.count);
+    self.stepCountLabel.text = [NSString stringWithFormat:@"%d",self.count];
+
+
 }
--(void) downButtonPressed {
+
+-(void) downButtonPressed:(id)sender {
     self.count--;
+    self.stepCountLabel.text = [NSString stringWithFormat:@"%d",self.count];
+
 }
 
 -(instancetype) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     UIView *stepperView = [[UIView alloc]init];
-    stepperView.frame = CGRectMake(110, 200, 200, 50);
+    stepperView.frame = CGRectMake(0, 0, 200, 50);
     stepperView.backgroundColor = [UIColor colorWithRed:(60/255.0) green:(188/255.0) blue:(181/255.0) alpha:1.0];
+   
+    //stepperView.center = self.view.center;
     // [self.view addSubview:stepperView];
     
-    UIButton *stepDownButton = [[UIButton alloc]init];
-    stepDownButton.frame = CGRectMake(10,10, 30, 30);
-    stepDownButton.backgroundColor = [UIColor redColor];
-    [stepDownButton addTarget:self action:@selector(downButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    //UIButton *stepDownButton = [[UIButton alloc]init];
+    
+    UIButton *stepDownButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [stepDownButton setTitle:@"-" forState:UIControlStateNormal];
+    stepDownButton.frame = CGRectMake(0, 0, 40, 50);
+    stepDownButton.backgroundColor = [UIColor colorWithRed:(153/255.0) green:(204/255.0) blue:(255/255.0)alpha:1.0];
+    [stepDownButton addTarget:self action:@selector(downButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [stepperView addSubview:stepDownButton];
     
-    UIButton *stepUpButton = [[UIButton alloc]init];
-    stepUpButton. frame = CGRectMake(160,10, 30, 30);
-    stepUpButton.backgroundColor = [UIColor redColor];
-    [stepUpButton addTarget:self action:@selector(downButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *stepUpButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [stepUpButton setTitle:@"+" forState:UIControlStateNormal];
+    stepUpButton. frame = CGRectMake(160,0, 40, 50);
+    stepUpButton.backgroundColor = [UIColor colorWithRed:(153/255.0) green:(204/255.0) blue:(255/255.0)alpha:1.0];
+    [stepUpButton addTarget:self action:@selector(upButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [stepperView addSubview:stepUpButton];
     
-    
-    UILabel *stepCountLabel = [[UILabel alloc]init];
-    stepCountLabel.frame = CGRectMake(85, 10, 30, 30);
-    stepCountLabel.text = [NSString stringWithFormat:@"%d",self.count];
-    stepCountLabel.backgroundColor = [UIColor lightGrayColor];
-    [stepperView addSubview:stepCountLabel];
+    self.stepCountLabel = [[UILabel alloc]init];
+    self.stepCountLabel.frame = CGRectMake(85, 0, 30, 50);
+    self.stepCountLabel.backgroundColor = [UIColor colorWithRed:(60/255.0) green:(188/255.0) blue:(181/255.0) alpha:1.0];
+    self.stepCountLabel.textAlignment = NSTextAlignmentCenter;
+    NSLog(@"%d",self.count);
+    [stepperView addSubview:self.stepCountLabel];
     [self addSubview:stepperView];
+
 
     return self;
 
